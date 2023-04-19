@@ -6,13 +6,18 @@ digit [0-9]
 us [_]
 id ({letter}|{us})({letter}|{digit}|{us})*
 number {digit}+(.{digit}+)?(E[+-]?{digit}+)?
+other ({digit}*)({letter}|{digit}|{us})*
 %%
-if {printf("%s is a keyword",yytext);}
-else { printf("%s is a keyword",yytext);}
-{id} {printf("%s is an identifier",yytext);}
-"<" { printf("%s is less than symbol",yytext);}
-"<=" { printf("%s is less than or equals to symbol",yytext);}
-{number} { printf("%s is a number",yytext);}
+
+if {printf("%s is a keyword\n",yytext);}
+else { printf("%s is a keyword\n",yytext);}
+{id} {printf("%s is an identifier\n",yytext);}
+
+"<" { printf("%s is less than symbol\n",yytext);}
+"<=" { printf("%s is less than or equals to symbol\n",yytext);}
+{number} { printf("%s is a number\n",yytext);}
+{other} {printf("%s is not an identifier\n",yytext);}
+
 %%
 int yywrap(){}
 int main()
